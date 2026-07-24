@@ -1,0 +1,74 @@
+﻿1. Write a query to create a database named college_db.
+
+
+Ans: create database college_db;
+2. Create a table students with columns:
+id INT, name VARCHAR(30), branch VARCHAR(20).
+Ans : create table students (id INT, name VARCHAR(30), branch VARCHAR(20));
+
+   3. Add a column email VARCHAR(40) to the students table.
+Ans :  alter table students add column email VARCHAR(40);
+
+   4. Add two columns phone BIGINT and city VARCHAR(20) in a single query.
+Ans : alter table students add column phone BIGINT , add column city VARCHAR(20));
+
+   5. Change the datatype of name from VARCHAR(30) to VARCHAR(50). 
+Ans : alter table students modify column name VARCHAR(50);
+
+
+   6. Modify the branch column size to VARCHAR(25).
+Ans: alter table students modify column branch VARCHAR(25);
+
+   7. Rename the column branch to department.
+Ans: alter table students rename column branch to department;
+
+
+
+
+    8. Rename the table students to student_details. 
+         Ans: rename table students to student_details;
+   9. Remove the column email from student_details.
+Ans:  alter table student_details drop column email;
+   10. Drop both phone and city columns using separate queries.
+          Ans: alter table student_details drop column phone;
+                    alter table student_details drop column city;
+
+   11. Write a query to remove all records from student_details but keep the table.
+Ans: truncate table student_details;
+   12. Write a query to permanently delete the student_details table.
+Ans: drop table student_details;
+
+   13. Rename the database college_db to college_database.
+Ans:we cannot rename the database only we can create new one.
+
+   14. Delete the database college_database.
+Ans: drop database college_database;
+
+   15. Display the structure of the table student_details.
+Ans: desc student_details;
+
+
+
+
+
+
+
+
+
+   16. Write a query to show all tables in the current database.
+Ans: show tables;
+   17. Create a table courses, then add a column duration INT.
+Ans: create table courses(name varchar(30));
+         alter table courses add column duration INT;
+
+   18. Create a table teachers, then rename it to faculty.
+Ans: create table teachers(name varchar(50)),
+        rename table teachers to faculty;
+
+   19. What happens if you run DROP TABLE students; when the table does not exist?
+Ans: the query will not run and show error 
+
+   20. Can TRUNCATE be rolled back? Write the query and explain.
+Ans : TRUNCATE cannot be rolled back.
+QUERY: truncate table table_name; 
+ Explanation: truncate is used to eliminate the records/rows from a given table and once its eliminated it cannot be rolled back
