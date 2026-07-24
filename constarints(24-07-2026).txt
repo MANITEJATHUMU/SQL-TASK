@@ -1,0 +1,21 @@
+﻿* Create a new SQL database named "customer_db" with a table named "customers" containing the following columns: customer_id, name, email, phone, and address.
+Create database customer_db;
+create table customers(customer_id int, name varchar(50), email varchar(70), phone bigint,address varchar(70));
+desc customers;
+* Apply the following constraints to the "customers" table:
+   * PRIMARY KEY constraint on the customer_id column
+   * UNIQUE constraint on the email column
+   * NOT NULL constraint on the name and phone columns
+   create table customers(customer_id int primary key , name varchar(50) not null, email varchar(70) Unique, phone bigint not null,address varchar(70));
+Insert at least 5 sample records into the "customers" table, ensuring that the constraints are enforced correctly.
+insert into customers values(1,"mani", "mani@gmail.com", 1234567889, "knr"),
+(2,"shiva" , "shiva@gmail.com",1234567899,"khm"),
+(3,"sandy" , "sandy@gmail.com",9876543211,"jskr"),
+(4,"rishi","rishi@gmail.com",678987654321,"mhbd"),
+(5,"teja","teja@gmail.com",23478123,"kmr");
+* Attempt to insert a duplicate email address to test the UNIQUE constraint, and observe the error message.
+insert into customers values(6,"vamshi","mani@gmail.com",1234565432,"GGD");
+Error message: email is duplicate number
+* Drop the "customers" table and recreate it without the NOT NULL constraint on the phone column. Insert a new record with a NULL phone number and verify that it is allowed.
+create table customers(customer_id int primary key , name varchar(50) not null, email varchar(70) Unique, phone bigint  null,address varchar(70));
+desc customers;
