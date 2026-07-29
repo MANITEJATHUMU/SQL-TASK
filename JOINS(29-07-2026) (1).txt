@@ -1,0 +1,94 @@
+﻿INNER JOIN
+1. Write a query to display employee name and department name.
+Select * from employee inner join deptt on employee.id=deptt.roll;
+2. Write a query to list employees working on projects.
+ Select * from employee inner join projects on employee.id=projects.pro_num;
+3. Write a query to find employees who are assigned to a department.
+Select * from employee inner join deptt on employee.id=dept.roll;
+4. Display employee name and project name using INNER JOIN.
+Select * from employee inner join projects on employee.id=projects.pro_num;
+
+
+
+
+LEFT JOIN 
+5. Write a query to display all employees, including those without a department.
+Select * from employee left join deptt on employee.id=deptt.roll;
+6. Display all employees and their projects, including employees with no projects.
+Select * from employee left join projects on employee.id=projects.pro_num;
+7. Write a query to show employee name and department name, even if the department is NULL.
+Select * from employee left join deptt on employee.id=deptt.roll;
+
+
+RIGHT JOIN 
+   8. Write a query to display all departments, even if no employees work in them.
+Select * from employee right join deptt on employee.id=deptt.roll;
+   9. Display all projects, including those not assigned to any employee.
+Select * from employee right join projects on employee.id=projects.pro_num;
+
+FULL JOIN (Using UNION)
+   10. Write a query to display all employees and all departments, including unmatched records.
+Select * from employee left join depttt on employee.id=depttt.roll
+Union
+Select * from employee right join depttt on employee.id=depttt.roll;
+
+   11. Show all employees and projects, even if no relation exists.
+Select * from employee left join projects on employee.id=projects.pro_num
+Union 
+Select * from employee right join projects on employee.id=projects.pro_num;
+
+
+
+
+CROSS JOIN
+   12. Write a query to display all possible combinations of employees and departments.
+Select * from employee cross join deptt;
+
+   13. Display employee names and project names using CROSS JOIN.
+Select * from employee cross join projects;
+
+   14. How many rows will be returned if employee has 5 rows and department has 4 rows? (Explain using CROSS JOIN)
+20 rows will be displayed
+Explanation: cross join will check every row in first table with each and every row in the second table just like cartesian product
+
+JOIN + CONDITIONS
+   18. Write a query to display employees working in the ‘IT’ department.
+Select * from employee inner join deptt on employee.id=deptt.roll 
+where deptt_name = "IT";
+
+
+
+   19. Display employees whose project name is ‘Banking System’.
+    Select * from employee inner join projects on employee.id=projects.pro_num 
+where pro_name="web";
+   20. Write a query to list employees without any project.
+Select * from employee inner join projects on employee.id=projects.pro_num 
+where pro_name is null;
+
+
+________________
+
+
+   21. What happens if you join an INT column with a VARCHAR column?
+select * from deptt as d join deptt as t on d.roll=t.deptt_name;
+It displays an empty set where there is no thing to compare and similar
+   22. Why does SQL throw an ambiguous column error in joins?
+                 Ambiguous error is possible in SQL, its because when the two        
+         different tables have same column name(like id) .so the SQL displays the    
+ambiguous column error in joins.
+
+   23. Can we join tables without primary and foreign keys? Write a query.
+                Yes we can join the tables without primary and foreign key by joins by comparing two or more different tables where that tables have 1 similar column each.
+
+   24. What is the difference between:
+
+      * JOIN  -join is used to compare the columns within the table
+
+      * JOIN … ON- 
+
+      * CROSS JOIN-cross join is used display all the combinations
+
+         25. Write a query and explain the difference between INNER JOIN and LEFT JOIN using output.
+         INNER JOIN:this is used to display the similar records in both the tables that are compared with
+         LEFT JOIN:this is used to display all the records in left table and the similar columns from the right table
+    Difference:inner join shows only similar records from both tables where left join shows the all records from left table and common records from right table
