@@ -1,0 +1,224 @@
+﻿Question 1
+Display the customer name, city, product, quantity, total amount (quantity × price) for customers who:
+* belong to Hyderabad or Chennai
+* purchased products between ₹2,000 and ₹70,000
+* payment mode is UPI or Card
+* order by total amount descending
+* display only top 5 records.
+select c.customer_id, c.customer_name, c.city, o.product, o.quantity,
+       sum(o.quantity * o.price) as total_amount 
+       from orders as o left join customers as c on  o.customer_id=c.customer_id
+where city in ('Hyderabad' ,'Chennai') and price between 2000 and 70000 and payment_mode in ('UPI' ,'Card') 
+group by  c.customer_id, c.customer_name,c.city,o.product,o.quantity
+order by total_amount DESC
+LIMIT 5;
+
+
+________________
+
+
+Question 2
+Display each category along with
+* total sales
+* average sales
+* maximum sale
+* minimum sale
+* number of orders
+Only include categories
+* having total sales greater than ₹50,000
+* average sales greater than ₹10,000
+Sort by highest sales.
+select category,
+SUM(quantity*price) as total_sales,
+avg(quantity*price) as avg_sales,
+min(quantity*price) as min_sales,
+max(quantity*price) as max_sales,
+count(order_id) as total_orders 
+from orders as o inner join customers as c on o.customer_id=c.customer_id
+group by category
+having 
+SUM(quantity*price)>50000 and
+avg(quantity*price)>10000;
+
+
+ 
+________________
+
+
+Question 3
+Find customers who have purchased more than one different product.
+Display
+* customer name
+* city
+* number of products purchased
+* total quantity ordered
+Sort by total quantity descending.
+select 
+c.customer_name,
+c.city,
+COUNT(DISTINCT o.product) as products,
+SUM(o.quantity) as total_quantity 
+from customers as c left join orders as o on c.customer_id=o.customer_id
+group by c.customer_name,c.city
+HAVING COUNT(DISTINCT o.product)>1 
+order by SUM(o.quantity) DESC;
+
+
+________________
+
+
+Question 4
+Display the details of customers who purchased products whose total amount is greater than the average total amount of all orders.
+Display
+* customer name
+* product
+* quantity
+* price
+* total amount
+Sort by total amount descending.
+Select customer_name,product,quantity,price,sum(o.quantity*o.price
+________________
+
+
+Question 5
+Display customers who
+* purchased Electronics
+* age greater than 24
+* city starts with 'H' or ends with 'i'
+* payment mode is not Cash
+Display
+* customer name
+* city
+* product
+* payment mode
+* total amount
+Sort alphabetically by customer name.
+select customer_name,category,city,sum(price * quantity) as total_amount,payment_mode from customers left join orders on customers.customer_id = orders.customer_id where age>24 and category = 'Electronics' and city like 'H%' or city like '%i' and payment_mode in ('UPI','Card') order by customer_name;
+
+
+________________
+
+
+Question 6
+Generate a report showing
+* customer name
+Only display customers whose total spending is greater than ₹30,000.
+Sort by spending descending.
+select customer_name,
+category,
+(quantity*price) as total_spending
+from customers as c right join orders as o on c.customer_id=o.customer_id
+where (quantity*price) > 30000 
+order by total_spending DESC;
+________________
+
+
+Question 7
+Find the top 3 customers who spent the highest amount.
+Display
+* customer name
+* city
+* total orders
+* total quantity
+* total spending
+Only include customers
+* having at least 2 orders.
+select customer_name,
+city,
+COUNT(order_id) as total_orders,
+SUM(quantity) as total_quantity,
+SUM(quantity*price) as total_spending
+from customers as c left join orders as o on c.customer_id=o.customer_id
+group by customer_name,
+city
+having COUNT(quantity)>=2 order by total_spending DESC
+limit 3;
+
+
+
+
+________________
+
+
+Question 8
+Display products that have been ordered by customers
+* from Hyderabad or Bangalore
+* age less than 30
+* quantity greater than or equal to 2
+Display
+* product
+* category
+* customer name
+* city
+* total amount
+Sort by category and then total amount descending.
+select 
+product,
+category,
+age,
+customer_name,
+city,
+(quantity*price) as total_amount
+from customers as c left join orders as o on c.customer_id=o.customer_id
+where (city='Hyderabad' or city='Banglore') and
+(age<=30) and (quantity>=2)
+order by category,(quantity*price) DESC;
+
+
+
+
+________________
+
+
+Question 9
+Display every customer along with
+* customer name
+* city
+* total orders
+If a customer has not placed any order, still display the customer with total orders as 0.
+Sort by total orders descending.
+select customer_name,
+COUNT(order_id) AS total_orders,
+city
+from customers as c left join orders as o on c.customer_id=o.customer_id
+group by customer_name,city   order by COUNT(order_id) DESC;
+
+
+
+
+
+
+________________
+
+
+Question 10 (Very Hard)
+Prepare a sales report showing
+* customer name
+* city
+* category
+* total quantity
+* total sales
+* average order value
+Only include customers
+* whose age is between 25 and 40
+* payment mode is Card or UPI
+* category is Electronics or Furniture
+Exclude 
+* orders where quantity = 1
+Display only categories
+* having total sales greater than ₹50,000 
+wSort by
+1. Category
+2. Total Sales DESC
+3. Customer Name ASC
+Display only the first 5 rows.
+Select c.customer_name, c.city,o.category,
+    SUM(o.quantity) AS total_quantity,
+    SUM(o.quantity * o.price) AS total_sales,
+    AVG(o.quantity * o.price) AS average_order_value
+FROM customers AS c LEFT JOIN orders AS o ON c.customer_id = o.customer_id
+WHERE c.age BETWEEN 25 AND 40  AND o.payment_mode IN ('Card', 'UPI') AND o.category IN ('Electronics', 'Furniture')  AND o.quantity <> 1
+GROUP BY c.customer_name, c.city, o.category
+HAVING  SUM(o.quantity * o.price) > 50000
+ORDER BYo.category,total_sales DESC,c.customer_name ASC
+LIMIT 5;
