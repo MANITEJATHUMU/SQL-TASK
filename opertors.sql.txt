@@ -1,0 +1,15 @@
+﻿Tasks / Requirements
+* Create a SQL database with a table named "employees" containing columns for employee ID, name, department, and salary.
+Create database DATABASES;
+Create table employees (employee ID int, name varchar(50), department varchar(50),salary int);
+* Write a SQL query that uses comparison operators to select all employees with a salary greater than $50,000.
+Select salary from employees where salary>50000;
+* Use logical operators to query employees who are either in the sales department or have a salary above $70,000.
+Select department,Sales from employees where department=”Sales” or where Salary>70000;
+* Apply arithmetic operators to calculate a 10% salary increase for all employees and update their salaries accordingly.
+Update employees set Salary=Salary+(Salary*10/100);
+* Utilize the IN operator to find all employees in the departments 'Marketing', 'IT', or 'Finance'.
+Select * from employees where department in ('Marketing', 'IT', 'Finance');
+
+
+View Full Assignment
